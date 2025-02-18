@@ -97,21 +97,23 @@ footer_include: _footer-category.html
         <a href="https://home.treasury.gov/policy-issues/tax-policy/tax-expenditures"
           class="usa-link usa-link--external" target="_blank" rel="noopener noreferrer">Treasury.gov</a>.
       </p>
-      <div class="display-flex margin-bottom-2">
-        <div class="padding-right-5 display-flex flex-column">
+      <div class="display-flex flex-wrap margin-bottom-2">
+        <div class="margin-right-4 margin-bottom-2 display-flex flex-column">
           <div class="text-primary font-sans-3xl text-bold">
             {{ page.total_num_programs }}
           </div>
           <div class="font-heading-lg line-height-heading-5">programs</div>
         </div>
-        <div class="padding-right-5 display-flex flex-column">
+        
+        <div class="margin-right-4 margin-bottom-2 display-flex flex-column">
           <div id="obligations-total" class="text-primary font-sans-3xl text-bold">
           </div>
           <div class="font-heading-lg line-height-heading-5">
             in FY {{ page.fiscal_year }} expenditures
           </div>
         </div>
-        <div class="display-flex flex-column">
+        
+        <div class="margin-bottom-2 display-flex flex-column">
           <div class="text-primary font-sans-3xl text-bold">
             {{ page.total_num_sub_cats }}
           </div>
@@ -180,7 +182,7 @@ footer_include: _footer-category.html
       <svg id="myChart" class="width-full" height="500" aria-label="Chart displaying data based on selection" role="img"></svg>
 
       <!-- Three tables, hidden/shown dynamically -->
-      <div id="table-container">
+      <div id="table-container" class="usa-table-container--scrollable">
         <div id="table-title" class="text-bold font-sans-lg text-primary">
           <!-- The title will be dynamically updated here -->
         </div>

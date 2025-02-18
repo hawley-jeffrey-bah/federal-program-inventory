@@ -89,18 +89,23 @@ footer_include: _footer-program.html
         </p>
 
         <!-- View Controls -->
-        <div id="viewControls" class="display-flex flex-align-center display-none">
-          <span class="font-sans-lg margin-right-2">View:</span>
-          <div class="usa-radio display-flex flex-align-center margin-right-2">
+        <div id="viewControls" class="display-flex flex-wrap flex-align-center display-none">
+          <!-- Label -->
+          <span class="font-sans-lg margin-right-2 margin-bottom-2">View:</span>
+          
+          <!-- Radio Options -->
+          <div class="usa-radio display-flex flex-align-center margin-right-2 margin-bottom-2">
             <input class="usa-radio__input" id="obligations" type="radio" name="view-options" checked />
-            <label class="usa-radio__label font-sans-sm line-height-body-3 margin-top-0" for="obligations">Program
-              obligations</label>
+            <label class="usa-radio__label font-sans-sm line-height-body-3 margin-top-0" for="obligations">
+              Program obligations
+            </label>
           </div>
-
-          <div class="usa-radio display-flex flex-align-center">
+          
+          <div class="usa-radio display-flex flex-align-center margin-bottom-2">
             <input class="usa-radio__input" id="outlays" type="radio" name="view-options" />
-            <label class="usa-radio__label font-sans-sm line-height-body-3 margin-top-0" for="outlays">Program
-              outlays</label>
+            <label class="usa-radio__label font-sans-sm line-height-body-3 margin-top-0" for="outlays">
+              Program outlays
+            </label>
           </div>
         </div>
 
