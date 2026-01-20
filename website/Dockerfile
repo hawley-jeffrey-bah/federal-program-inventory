@@ -2,7 +2,7 @@
 #          This stage is responsible for using Jekyll to build the static
 #          files that are ultimately served by nginx. This is not the final
 #          image.
-FROM ruby:3.2.2 AS build-image
+FROM node:18-bookworm AS build-image
 ARG http_proxy
 ARG https_proxy
 ARG no_proxy
@@ -14,18 +14,16 @@ ENV http_proxy=$http_proxy \
     HTTPS_PROXY=$https_proxy \
     NO_PROXY=$no_proxy
 
+# Install Ruby and update certificates
+RUN apt-get update && \
+    apt-get install -y ruby-full build-essential ca-certificates && \
+    update-ca-certificates && \
+    gem install bundler
+
 WORKDIR /app
 COPY ./Gemfile /app/Gemfile
 COPY ./package.json /app/package.json
-RUN apt-get clean && \
-    apt-get update && \
-    apt-get install -y curl git ca-certificates gnupg && \
-    mkdir -p /etc/apt/keyrings && \
-    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
-    apt-get update && \
-    apt-get install -y nodejs && \
-    npm install --legacy-peer-deps chart.js && \
+RUN npm install --legacy-peer-deps chart.js && \
     bundle install
 
 COPY . /app
