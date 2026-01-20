@@ -3,9 +3,6 @@
 #          files that are ultimately served by nginx. This is not the final
 #          image.
 FROM ruby:3.2.2 AS build-image
-ENV NODE_VERSION=18.17.1
-ENV NVM_DIR=/root/.nvm
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 ARG http_proxy
 ARG https_proxy
 ARG no_proxy
@@ -22,10 +19,12 @@ COPY ./Gemfile /app/Gemfile
 COPY ./package.json /app/package.json
 RUN apt-get clean && \
     apt-get update && \
-    apt-get install -y curl git && \
-    curl -k -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash && \
-    . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION} && \
-    . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION} && \
+    apt-get install -y curl git ca-certificates gnupg && \
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install -y nodejs && \
     npm install --legacy-peer-deps chart.js && \
     bundle install
 
