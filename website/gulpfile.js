@@ -1,13 +1,11 @@
-/**
-* Compile USWDS
-*/
-const uswds = require("@uswds/compile");
+const uswds = require("uswds-extended/compile");
+const path = require("path");
 
 uswds.settings.version = 3;
 
-uswds.paths.dist.img = "./_site/assets/img";
-uswds.paths.dist.fonts = "./_site/assets/fonts";
-uswds.paths.dist.js	= "./_site/assets/js";
-uswds.paths.dist.css = "./_site/assets/css";
+uswds.paths.dist.css = path.join(__dirname, "assets/css");
+uswds.paths.dist.theme = path.join(__dirname, "sass");
 
-exports.updateUswds = uswds.updateUswds;
+exports.init = uswds.init;
+exports.compile = uswds.compile;
+exports.watch = uswds.watch;
