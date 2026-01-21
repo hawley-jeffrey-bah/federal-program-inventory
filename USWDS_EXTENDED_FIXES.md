@@ -9,52 +9,48 @@ I have completed the migration to `uswds-extended` and identified critical fixes
 
 ## 2. Package Improvements (Root Cause Analysis)
 
-The build issues were caused by `uswds-extended` incorrectly resolving package paths in a "Full Installation" (Option 2) where the standard `@uswds/uswds` package is missing or empty.
+The build issues were caused by two factors in `uswds-extended`:
+1.  Incorrect path resolution in "Full Installation" scenarios (Fixed in v3.14.5).
+2.  **Legacy API Usage**: The package uses `includePaths` (Node Sass API) which `sass-embedded` (Dart Sass) does not reliably support in this Gulp context. It requires `loadPaths`.
 
-### The Fix: Update `compile/index.js`
+### The Fixes: Update `compile/index.js`
 The following changes render the package robust for all installation types.
 
-#### A. Improved Path Resolution
-Prioritize the bundled `packages` directory within `uswds-extended`. This prevents the build from accidentally picking up empty/hoisted standard packages.
+#### A. Improved Path Resolution (Applied in v3.14.5)
+*This is verified as present in v3.14.5.*
+
+#### B. API Compatibility (NEW FIX REQUIRED)
+The `sass-embedded` compiler requires `loadPaths` instead of `includePaths`.
+
+**Locate `compile/index.js` (around line 324 and 380):**
+
+Change `includePaths` to `loadPaths`:
 
 ```javascript
-// In compile/index.js
+// In buildSass function
+    .pipe(
+      sass({
+        outputStyle: "compressed",
+        loadPaths: buildSettings.includes, // <--- CHANGE THIS (was includePaths)
+        quietDeps: !settings.compile.sassDeprecationWarnings,
+      }).on("error", handleError)
+    )
 
-function resolvePackagePath() {
-  // 1. Extended location (bundled packages) - PRIORITY
-  // Relative to: node_modules/uswds-extended/compile/index.js
-  const extendedPath = path.resolve(__dirname, "../packages");
-
-  // 2. Standard location (peer dependency)
-  const standardPath = "./node_modules/@uswds/uswds/packages";
-
-  if (fs.existsSync(extendedPath)) {
-    return extendedPath;
-  } 
-  // Only fall back if bundled packages are missing
-  return standardPath;
-}
-```
-
-#### B. Simplified Include Paths
-The original include logic was cluttering the SASS compiler with invalid paths. The simplified logic works universally:
-
-```javascript
-// In compile/index.js
-
-    includes: [
-      paths.dist.theme,
-      // Just use the resolved path. checking for "sass" key in paths.src
-      getSrcFrom("sass"), 
-    ],
+// In buildSassExtended function
+      .pipe(
+        sass({
+          outputStyle: "expanded",
+          loadPaths: buildSettings.includes, // <--- CHANGE THIS (was includePaths)
+          quietDeps: !settings.compile.sassDeprecationWarnings,
+        }).on("error", handleError)
+      )
 ```
 
 ## 3. Recommended Actions for Package Maintainer
-To fix the npm package version `3.14.4+`:
+To fix the npm package version `3.14.6+`:
 
-1.  **Apply the Logic**: Update `src/compile/index.js` in your repository with the `resolvePackagePath` logic above.
-2.  **Clean Includes**: Remove the legacy `${getSrcFrom("sass")}/packages` entry from the `includes` array in `buildSass` / `buildSassExtended`.
-3.  **Update README**: Update the default Gulpfile example to use `path.join` for better cross-platform support.
+1.  **Update Sass Option**: Rename `includePaths` to `loadPaths` in both `buildSass` and `buildSassExtended` functions in `src/compile/index.js`.
+2.  **Clean Includes**: Remove the legacy `${getSrcFrom("sass")}/packages` entry from the `includes` array if it still exists, as `resolvePackagePath` handles it now.
 
 ## Verification
-I created a standalone verification script that successfully compiled the project's SASS using this exact logic, bypassing the broken Gulp pipeline to prove the fix works.
+I verified that applying this API change allows the build to successfully locate `uswds-core` and generate the CSS output.

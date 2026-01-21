@@ -1,5 +1,4 @@
 const uswds = require("uswds-extended/compile");
-console.error("DEBUG: uswds-extended/compile resolved to:", require.resolve("uswds-extended/compile"));
 const path = require("path");
 
 uswds.paths.dist.css = path.join(__dirname, "assets/css");
