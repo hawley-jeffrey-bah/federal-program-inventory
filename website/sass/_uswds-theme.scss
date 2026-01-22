@@ -1,15 +1,75 @@
 /*
 ----------------------------------------
-USWDS with settings overrides
-----------------------------------------
-Uncomment the following lines and add a list of changed settings
-in the form $setting: value,
+USWDS Theme Configuration
+Federal Program Inventory - Modern Design System
 ----------------------------------------
 */
 
-//
-//  @use "uswds-core" with (
-//    $setting: value,
-//    $setting: value
-//  );
-//
+@use "uswds-core" with (
+  // ============================================
+  // GENERAL SETTINGS
+  // ============================================
+  $theme-show-notifications: false,
+
+  // ============================================
+  // COLOR PALETTE
+  // ============================================
+  $theme-color-primary-darkest: "blue-cool-80",
+  $theme-color-primary-darker: "blue-cool-70v",
+  $theme-color-primary-dark: "blue-cool-60v",
+  $theme-color-primary: "blue-cool-50v",
+  $theme-color-primary-light: "blue-cool-40v",
+  $theme-color-primary-lighter: "blue-cool-20v",
+  $theme-color-primary-lightest: "blue-cool-5v",
+
+  $theme-color-secondary-darkest: "indigo-cool-80",
+  $theme-color-secondary-darker: "indigo-cool-70",
+  $theme-color-secondary-dark: "indigo-cool-60",
+  $theme-color-secondary: "indigo-cool-50",
+  $theme-color-secondary-light: "indigo-cool-40",
+  $theme-color-secondary-lighter: "indigo-cool-20",
+  $theme-color-secondary-lightest: "indigo-cool-5",
+
+  $theme-color-accent-cool: "cyan-30v",
+  $theme-color-accent-cool-dark: "cyan-40v",
+  $theme-color-accent-cool-light: "cyan-20v",
+  $theme-color-accent-cool-lighter: "cyan-10",
+  $theme-color-accent-cool-lightest: "cyan-5",
+
+  $theme-color-accent-warm: "gold-20v",
+  $theme-color-accent-warm-dark: "gold-30v",
+  $theme-color-accent-warm-light: "gold-10v",
+  $theme-color-accent-warm-lighter: "gold-5v",
+
+  $theme-color-base-darkest: "gray-cool-90",
+  $theme-color-base-darker: "gray-cool-80",
+  $theme-color-base-dark: "gray-cool-60",
+  $theme-color-base: "gray-cool-50",
+  $theme-color-base-light: "gray-cool-40",
+  $theme-color-base-lighter: "gray-cool-10",
+  $theme-color-base-lightest: "gray-cool-2",
+
+  // ============================================
+  // TYPOGRAPHY
+  // ============================================
+  $theme-font-path: "../fonts",
+  $theme-font-type-sans: "source-sans-pro",
+
+  // ============================================
+  // FOCUS STYLES
+  // ============================================
+  $theme-focus-color: "cyan-40v",
+
+  // ============================================
+  // UTILITIES
+  // ============================================
+  $theme-utility-breakpoints: (
+    "mobile": false,
+    "mobile-lg": true,
+    "tablet": true,
+    "tablet-lg": true,
+    "desktop": true,
+    "desktop-lg": true,
+    "widescreen": false
+  )
+);

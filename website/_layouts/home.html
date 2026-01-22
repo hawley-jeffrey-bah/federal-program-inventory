@@ -4,126 +4,268 @@ footer_include: _footer-home.html
 permalink: /
 ---
 
-<div class="home-background position-relative">
-  <div class="display-flex flex-column">
-    <div class="display-flex flex-justify-center padding-top-5">
-      <div class="grid-container-tablet-lg">
-        <div class="usa-layout-grid padding-3 radius-md bg-primary-darker">
-          <div class="width-full text-center text-white font-sans-2xl tablet:font-sans-3xl text-light line-height-sans-1">
-            The U.S. Federal Government administers over 2,600 federal programs, totaling over $7 trillion in FY {{ page.fiscal_year }} expenditures.
-          </div>
-          <div class="display-flex flex-justify-center margin-top-3">
-            <a href="/category" class="usa-button bg-primary font-body-md tablet:font-sans-lg text-bold hover:bg-accent-cool hover:text-primary">
-              Explore programs by category 
-            </a>
-          </div>
+<!-- Hero Section -->
+<section class="hero bg-gradient-hero position-relative overflow-hidden">
+  <!-- Background Pattern Overlay -->
+  <div class="position-absolute top-0 left-0 right-0 bottom-0 opacity-10" aria-hidden="true"></div>
+
+  <div class="position-relative z-100">
+    <div class="grid-container padding-y-8 tablet:padding-y-10">
+      <!-- Main Hero Content -->
+      <div class="display-flex flex-column flex-align-center text-center maxw-desktop-lg margin-x-auto">
+        <!-- Eyebrow -->
+        <div class="display-inline-flex flex-align-center padding-x-2 padding-y-05 bg-white/10 radius-pill margin-bottom-3 backdrop-blur-sm">
+          <span class="text-white font-sans-xs text-uppercase text-ls-2 text-semibold">Office of Management and Budget</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="text-white font-heading-3xl tablet:font-heading-4xl desktop:font-heading-5xl text-light margin-0 line-height-heading-2">
+          Federal Program Inventory
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-white/90 font-sans-lg tablet:font-sans-xl maxw-tablet margin-top-3 margin-bottom-0 line-height-sans-4">
+          Explore over <span class="text-accent-cool-light text-bold">2,600 federal programs</span>
+          totaling more than <span class="text-accent-warm-light text-bold">$7 trillion</span>
+          in FY {{ page.fiscal_year }} expenditures.
+        </p>
+
+        <!-- CTA Button -->
+        <div class="margin-top-5">
+          <a href="/category" class="usa-button bg-accent-cool hover:bg-accent-cool-dark text-white font-sans-md padding-x-4 padding-y-2 radius-lg shadow-md hover:shadow-lg transition-base text-no-underline display-inline-flex flex-align-center">
+            <span>Explore programs by category</span>
+            <svg class="usa-icon margin-left-1" aria-hidden="true" focusable="false" role="img">
+              <use xlink:href="/assets/img/sprite.svg#arrow_forward"></use>
+            </svg>
+          </a>
         </div>
       </div>
-    </div>
 
-    <div class="width-full bg-white margin-top-4" style="background-color: rgba(255, 255, 255, 0.9);">
-      <div class="grid-container-desktop-lg padding-bottom-7">
-        <h1 class="font-heading-xl tablet:font-heading-2xl text-light text-primary margin-bottom-0">
-          Find programs in the Federal Program Inventory
-        </h1>
-        <div class="grid-row grid-gap-6">
-          <div class="grid-col-12 tablet:grid-col-3">
-            <label class="usa-label text-bold line-height-sans-1" for="agency-select">Agency</label>
-            <div class="usa-combo-box">
-              <select class="usa-select" name="agency-select" id="agency-select">
-                <option value="">Select an agency</option>
-                {% for agency in page.cfo_agencies %}
-                <option value="{{ agency.title | slugify }}">{{ agency.title }}</option>
-                {% endfor %}
-                <option value="other-agencies">Other agencies</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="grid-col-12 tablet:grid-col-3">
-            <label class="usa-label text-bold line-height-sans-1" for="category-select">Category</label>
-            <div class="usa-combo-box">
-              <select class="usa-select" name="category-select" id="category-select">
-                <option value="">Select a category</option>
-                {% for category in page.categories %}
-                <option value="{{ category.title | slugify }}">{{ category.title }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-
-          <div class="grid-col-12 tablet:grid-col-3">
-            <label class="usa-label text-bold line-height-sans-1" for="program-type-select">Program type</label>
-            <div class="usa-combo-box">
-              <select class="usa-select" name="program-type-select" id="program-type-select">
-                <option value="">Select a program type</option>
-                {% for type in page.program_types %}
-                <option value="{{ type.title | slugify }}">{{ type.title }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-
-          <div class="grid-col-12 tablet:grid-col-3">
-            <label class="usa-label text-bold line-height-sans-1" for="applicant-select">Eligible applicant</label>
-            <div class="usa-combo-box">
-              <select class="usa-select" name="applicant-select" id="applicant-select">
-                <option value="">Select eligible applicant type</option>
-                {% for applicant in page.applicant_types %}
-                <option value="{{ applicant.title | slugify }}">{{ applicant.title }}</option>
-                {% endfor %}
-              </select>
-            </div>
+      <!-- Stats Row -->
+      <div class="grid-row grid-gap-3 margin-top-8 tablet:margin-top-10">
+        <div class="grid-col-12 tablet:grid-col-4">
+          <div class="hero-stat text-center">
+            <div class="text-accent-cool-light font-heading-3xl tablet:font-heading-4xl text-bold line-height-heading-1">2,600+</div>
+            <div class="text-white/80 font-sans-md margin-top-1">Federal Programs</div>
           </div>
         </div>
-
-        <button class="usa-button margin-top-205" id="find-programs-button">Find Programs</button>
+        <div class="grid-col-12 tablet:grid-col-4 margin-top-2 tablet:margin-top-0">
+          <div class="hero-stat text-center">
+            <div class="text-accent-warm-light font-heading-3xl tablet:font-heading-4xl text-bold line-height-heading-1">$7T+</div>
+            <div class="text-white/80 font-sans-md margin-top-1">FY {{ page.fiscal_year }} Expenditures</div>
+          </div>
+        </div>
+        <div class="grid-col-12 tablet:grid-col-4 margin-top-2 tablet:margin-top-0">
+          <div class="hero-stat text-center">
+            <div class="text-primary-lighter font-heading-3xl tablet:font-heading-4xl text-bold line-height-heading-1">24</div>
+            <div class="text-white/80 font-sans-md margin-top-1">CFO Act Agencies</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<section class="width-full bg-secondary">
-  <div class="grid-container padding-bottom-1">
-      <div class="width-full text-white font-sans-xl line-height-sans-3 padding-top-5 padding-bottom-2">About the Federal Program Inventory
-      </div>
-      <div class="grid-row">
-          <div class="grid-col-8">
-              <p class="text-white font-sans-sm line-height-sans-3 margin-bottom-1">
-                  In 2024, building upon the successful 2020 exploratory pilot effort and recommendations published in the
-                  2021 Report to Congress, OMB launched the Federal Program Inventory, which focused on Federal financial
-                  assistance. In 2025, OMB expanded the Federal Program Inventory to include Tax Expenditures and Interest
-                  on the Public Debt.
-              </p>
+<!-- Search Section -->
+<section class="bg-white position-relative z-200 shadow-lg">
+  <div class="grid-container padding-y-6 tablet:padding-y-8">
+    <!-- Section Header -->
+    <div class="maxw-tablet-lg">
+      <h2 class="font-heading-xl tablet:font-heading-2xl text-primary margin-0 line-height-heading-2">
+        Find programs in the Federal Program Inventory
+      </h2>
+      <p class="text-base-dark font-sans-md margin-top-2 margin-bottom-0 line-height-sans-4">
+        Search by agency, category, program type, or eligible applicant to discover federal programs that match your criteria.
+      </p>
+    </div>
 
-              <p class="text-white font-sans-sm text-bold line-height-sans-3">
-                  <a href="/about/fpi" class="text-white text-no-underline">
-                      Learn more >
-                  </a>
-              </p>
+    <!-- Filter Form -->
+    <div class="margin-top-5">
+      <div class="grid-row grid-gap-3">
+        <!-- Agency Select -->
+        <div class="grid-col-12 tablet:grid-col-6 desktop:grid-col-3">
+          <label class="usa-label font-sans-xs text-bold text-base-dark text-uppercase text-ls-1 margin-bottom-1" for="agency-select">
+            Agency
+          </label>
+          <div class="usa-combo-box">
+            <select class="usa-select radius-md" name="agency-select" id="agency-select">
+              <option value="">Select an agency</option>
+              {% for agency in page.cfo_agencies %}
+              <option value="{{ agency.title | slugify }}">{{ agency.title }}</option>
+              {% endfor %}
+              <option value="other-agencies">Other agencies</option>
+            </select>
           </div>
-          <div class="grid-col-4">
-              <div class="bars-container position-relative overflow-hidden tablet:overflow-visible">
-                  <!-- First bar -->
-                  <div class="height-3 bg-primary margin-bottom-1" style="margin-left: 5%; width: 100vw"></div>
-                  <!-- Second bar -->
-                  <div class="height-3 bg-accent-warm margin-bottom-1" style="margin-left: 29%; width: 100vw"></div>
-                  <!-- Third bar -->
-                  <div class="height-3 bg-warning margin-bottom-1" style="margin-left: 7%; width: 100vw"></div>
-                  <!-- Fourth bar -->
-                  <div class="height-3 bg-secondary-dark margin-bottom-1" style="margin-left: 15%; width: 100vw"></div>
-                  <!-- Fifth bar -->
-                  <div class="height-3 bg-info-dark margin-bottom-1" style="margin-left: 27%; width: 100vw"></div>
-                  <!-- Sixth bar -->
-                  <div class="height-3 bg-primary-darker margin-bottom-1" style="margin-left: 39%; width: 100vw"></div>
-                  <!-- Seventh bar -->
-                  <div class="height-3 bg-error margin-bottom-1" style="margin-left: 5%; width: 100vw"></div>
-                  <!-- Eighth bar -->
-                  <div class="height-3 bg-info-lighter margin-bottom-1" style="margin-left: 20%; width: 100vw"></div>
-                  <!-- Ninth bar -->
-                  <div class="height-3 bg-gold margin-bottom-1" style="margin-left: 15%; width: 100vw"></div>
-              </div>
+        </div>
+
+        <!-- Category Select -->
+        <div class="grid-col-12 tablet:grid-col-6 desktop:grid-col-3 margin-top-2 tablet:margin-top-0">
+          <label class="usa-label font-sans-xs text-bold text-base-dark text-uppercase text-ls-1 margin-bottom-1" for="category-select">
+            Category
+          </label>
+          <div class="usa-combo-box">
+            <select class="usa-select radius-md" name="category-select" id="category-select">
+              <option value="">Select a category</option>
+              {% for category in page.categories %}
+              <option value="{{ category.title | slugify }}">{{ category.title }}</option>
+              {% endfor %}
+            </select>
           </div>
+        </div>
+
+        <!-- Program Type Select -->
+        <div class="grid-col-12 tablet:grid-col-6 desktop:grid-col-3 margin-top-2 desktop:margin-top-0">
+          <label class="usa-label font-sans-xs text-bold text-base-dark text-uppercase text-ls-1 margin-bottom-1" for="program-type-select">
+            Program type
+          </label>
+          <div class="usa-combo-box">
+            <select class="usa-select radius-md" name="program-type-select" id="program-type-select">
+              <option value="">Select a program type</option>
+              {% for type in page.program_types %}
+              <option value="{{ type.title | slugify }}">{{ type.title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <!-- Eligible Applicant Select -->
+        <div class="grid-col-12 tablet:grid-col-6 desktop:grid-col-3 margin-top-2 desktop:margin-top-0">
+          <label class="usa-label font-sans-xs text-bold text-base-dark text-uppercase text-ls-1 margin-bottom-1" for="applicant-select">
+            Eligible applicant
+          </label>
+          <div class="usa-combo-box">
+            <select class="usa-select radius-md" name="applicant-select" id="applicant-select">
+              <option value="">Select eligible applicant type</option>
+              {% for applicant in page.applicant_types %}
+              <option value="{{ applicant.title | slugify }}">{{ applicant.title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
       </div>
+
+      <!-- Search Button -->
+      <div class="margin-top-4">
+        <button class="usa-button bg-primary hover:bg-primary-dark text-white font-sans-md padding-x-4 padding-y-105 radius-md shadow-sm hover:shadow-md transition-fast" id="find-programs-button">
+          <svg class="usa-icon margin-right-1" aria-hidden="true" focusable="false" role="img">
+            <use xlink:href="/assets/img/sprite.svg#search"></use>
+          </svg>
+          Find Programs
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="bg-primary-darker position-relative overflow-hidden">
+  <!-- Decorative Background -->
+  <div class="position-absolute top-0 right-0 bottom-0 width-50 display-none tablet:display-block" aria-hidden="true">
+    <!-- Abstract Data Visualization Lines -->
+    <div class="position-absolute top-0 right-0 bottom-0 left-0 display-flex flex-column flex-justify-center padding-y-4">
+      <div class="height-05 bg-primary margin-bottom-105 margin-left-10 width-full radius-left-pill opacity-60"></div>
+      <div class="height-05 bg-accent-warm margin-bottom-105 margin-left-15 width-full radius-left-pill opacity-70"></div>
+      <div class="height-05 bg-accent-cool margin-bottom-105 margin-left-8 width-full radius-left-pill opacity-50"></div>
+      <div class="height-05 bg-primary-light margin-bottom-105 margin-left-20 width-full radius-left-pill opacity-60"></div>
+      <div class="height-05 bg-secondary-light margin-bottom-105 margin-left-6 width-full radius-left-pill opacity-40"></div>
+      <div class="height-05 bg-accent-warm-light margin-bottom-105 margin-left-12 width-full radius-left-pill opacity-50"></div>
+      <div class="height-05 bg-primary margin-bottom-105 margin-left-18 width-full radius-left-pill opacity-30"></div>
+      <div class="height-05 bg-accent-cool-light margin-bottom-105 margin-left-4 width-full radius-left-pill opacity-60"></div>
+      <div class="height-05 bg-warning margin-bottom-105 margin-left-14 width-full radius-left-pill opacity-40"></div>
+    </div>
+  </div>
+
+  <div class="grid-container padding-y-6 tablet:padding-y-8 position-relative z-100">
+    <div class="grid-row grid-gap-4">
+      <!-- Content Column -->
+      <div class="grid-col-12 tablet:grid-col-7 desktop:grid-col-6">
+        <div class="display-inline-flex flex-align-center padding-x-2 padding-y-05 bg-white/10 radius-pill margin-bottom-3">
+          <span class="text-white font-sans-2xs text-uppercase text-ls-2 text-semibold">About the Data</span>
+        </div>
+
+        <h2 class="text-white font-heading-xl tablet:font-heading-2xl margin-0 line-height-heading-2">
+          About the Federal Program Inventory
+        </h2>
+
+        <p class="text-white/80 font-sans-md line-height-sans-4 margin-top-3 margin-bottom-0">
+          In 2024, building upon the successful 2020 exploratory pilot effort and recommendations published in the 2021 Report to Congress, OMB launched the Federal Program Inventory, which focused on Federal financial assistance.
+        </p>
+
+        <p class="text-white/80 font-sans-md line-height-sans-4 margin-top-2 margin-bottom-0">
+          In 2025, OMB expanded the Federal Program Inventory to include Tax Expenditures and Interest on the Public Debt.
+        </p>
+
+        <div class="margin-top-4">
+          <a href="/about/fpi" class="usa-button usa-button--outline border-white text-white hover:bg-white/10 font-sans-sm padding-x-3 padding-y-1 radius-md transition-fast text-no-underline display-inline-flex flex-align-center">
+            <span>Learn more about the FPI</span>
+            <svg class="usa-icon margin-left-1" aria-hidden="true" focusable="false" role="img">
+              <use xlink:href="/assets/img/sprite.svg#arrow_forward"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Links Section -->
+<section class="bg-base-lightest">
+  <div class="grid-container padding-y-6 tablet:padding-y-8">
+    <h2 class="font-heading-lg text-primary text-center margin-0 margin-bottom-5">
+      Quick Links
+    </h2>
+
+    <div class="grid-row grid-gap-3">
+      <!-- Search Programs Card -->
+      <div class="grid-col-12 tablet:grid-col-4">
+        <a href="/search" class="card display-block padding-4 text-no-underline height-full">
+          <div class="display-flex flex-align-center margin-bottom-2">
+            <div class="display-flex flex-align-center flex-justify-center width-6 height-6 bg-primary-lighter radius-lg">
+              <svg class="usa-icon text-primary" style="width: 24px; height: 24px;" aria-hidden="true" focusable="false" role="img">
+                <use xlink:href="/assets/img/sprite.svg#search"></use>
+              </svg>
+            </div>
+          </div>
+          <h3 class="font-heading-md text-primary margin-0 line-height-heading-3">Program Search</h3>
+          <p class="text-base font-sans-sm margin-top-1 margin-bottom-0 line-height-sans-4">
+            Search and filter through all federal programs using multiple criteria.
+          </p>
+        </a>
+      </div>
+
+      <!-- Explore by Category Card -->
+      <div class="grid-col-12 tablet:grid-col-4 margin-top-2 tablet:margin-top-0">
+        <a href="/category" class="card display-block padding-4 text-no-underline height-full">
+          <div class="display-flex flex-align-center margin-bottom-2">
+            <div class="display-flex flex-align-center flex-justify-center width-6 height-6 bg-accent-cool-lighter radius-lg">
+              <svg class="usa-icon text-accent-cool-dark" style="width: 24px; height: 24px;" aria-hidden="true" focusable="false" role="img">
+                <use xlink:href="/assets/img/sprite.svg#grid_view"></use>
+              </svg>
+            </div>
+          </div>
+          <h3 class="font-heading-md text-primary margin-0 line-height-heading-3">Explore by Category</h3>
+          <p class="text-base font-sans-sm margin-top-1 margin-bottom-0 line-height-sans-4">
+            Browse programs organized by functional categories and sub-categories.
+          </p>
+        </a>
+      </div>
+
+      <!-- About the Data Card -->
+      <div class="grid-col-12 tablet:grid-col-4 margin-top-2 tablet:margin-top-0">
+        <a href="/about/about-the-data" class="card display-block padding-4 text-no-underline height-full">
+          <div class="display-flex flex-align-center margin-bottom-2">
+            <div class="display-flex flex-align-center flex-justify-center width-6 height-6 bg-accent-warm-lighter radius-lg">
+              <svg class="usa-icon text-accent-warm-dark" style="width: 24px; height: 24px;" aria-hidden="true" focusable="false" role="img">
+                <use xlink:href="/assets/img/sprite.svg#info"></use>
+              </svg>
+            </div>
+          </div>
+          <h3 class="font-heading-md text-primary margin-0 line-height-heading-3">About the Data</h3>
+          <p class="text-base font-sans-sm margin-top-1 margin-bottom-0 line-height-sans-4">
+            Learn about data sources, methodology, and how the inventory is compiled.
+          </p>
+        </a>
+      </div>
+    </div>
   </div>
 </section>

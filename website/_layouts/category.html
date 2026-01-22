@@ -4,357 +4,260 @@ header_title: Explore programs by category
 footer_include: _footer-category.html
 ---
 
-<section
-  class="bg-primary-darker padding-x-2 padding-y-3"
-  style="
-    background-image: url('../../assets/img/banner.png'),
-      linear-gradient(0deg, #272a63, #272a63);
-    background-position: center right;
-    background-repeat: no-repeat;
-    background-size: contain;
-  "
->
-  <div class="grid-container">
-    <div class="grid-row">
-      <div class="grid-col-12">
-        <h1
-          class="usa-display usa-heading text-white font-heading-2xl text-light"
-        >
-          {{ layout.header_title }}
-        </h1>
-      </div>
-    </div>
+<!-- Page Header -->
+<section class="bg-gradient-hero position-relative overflow-hidden">
+  <div class="position-absolute top-0 left-0 right-0 bottom-0 opacity-5" aria-hidden="true"></div>
+  <div class="grid-container padding-y-5 tablet:padding-y-6 position-relative z-100">
+    <h1 class="text-white font-heading-2xl tablet:font-heading-3xl text-light margin-0 line-height-heading-2">
+      {{ layout.header_title }}
+    </h1>
+    <p class="text-white/80 font-sans-md margin-top-1 margin-bottom-0 line-height-sans-3 maxw-tablet">
+      Browse federal programs organized by functional categories
+    </p>
   </div>
 </section>
 
-<div class="grid-container">
-  <div class="grid-row grid-gap">
-    <nav class="usa-breadcrumb padding-top-1" aria-label="Breadcrumbs,,">
-      <ol class="usa-breadcrumb__list">
+<main id="main-content">
+  <div class="grid-container padding-y-4">
+    <!-- Breadcrumb -->
+    <nav class="usa-breadcrumb margin-bottom-4" aria-label="Breadcrumbs">
+      <ol class="usa-breadcrumb__list display-flex flex-align-center padding-0 margin-0">
         <li class="usa-breadcrumb__list-item">
-          <a href="/" class="usa-breadcrumb__link"><span>Home</span></a>
+          <a href="/" class="usa-breadcrumb__link text-primary hover:text-primary-dark font-sans-xs display-flex flex-align-center">
+            <svg class="usa-icon margin-right-05" style="width: 16px; height: 16px;" aria-hidden="true" focusable="false" role="img">
+              <use xlink:href="/assets/img/sprite.svg#home"></use>
+            </svg>
+            Home
+          </a>
         </li>
         <li class="usa-breadcrumb__list-item">
-          <a href="/category" class="usa-breadcrumb__link"
-            ><span>Explore programs by category</span></a
-          >
+          <a href="/category" class="usa-breadcrumb__link text-primary hover:text-primary-dark font-sans-xs">
+            Explore by Category
+          </a>
         </li>
         <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-          <span>{{ page.title }}</span>
+          <span class="font-sans-xs text-base">{{ page.title }}</span>
         </li>
       </ol>
     </nav>
-  </div>
-  <div class="grid-row grid-gap padding-top-1">
-    <div class="width-full text-primary font-sans-xl line-height-sans-2">
-      {{ page.title }}
-    </div>
-    <div class="grid-col-8 line-height-sans-3 padding-top-1">
-      Programs and the related information listed on this page use data pulled from
-      SAM.gov, USASpending.gov, and Treasury.gov.
-      <br />
-      <br />
-      Select from the dropdown below to view a category. Once you've selected a
-      category, you can select a sub-category under it.
-    </div>
-  </div>
 
-  <div class="display-flex flex-wrap flex-align-end">
-    <div class="margin-right-205 margin-bottom-2">
-      <label class="usa-label" for="category"
-        >Select category
-        <span class="usa-label--required">(Required)</span></label
-      >
-      <select class="usa-select width-mobile" name="category" id="category">
-        <option value>All categories</option>
-      </select>
-    </div>
-    <div class="margin-right-205 margin-bottom-2">
-      <label class="usa-label" for="subcategory">Select sub-category</label>
-      <select
-        class="usa-select width-mobile"
-        name="subcategory"
-        id="subcategory"
-      >
-        <option value>-Select-</option>
-      </select>
-    </div>
-    <button id="category-button" class="usa-button bg-primary margin-bottom-2 padding-x-3">
-      Update category
-    </button>
-  </div>
-
-  <div class="border-1px border-ink radius-md margin-bottom-5">
-    <div class="margin-205">
-      <h3 class="text-primary font-heading-lg text-bold line-height-heading-3">
-        {{ page.title }} expenditures
-      </h3>
-
-      <p class="text-ink font-sans-sm line-height-body-3">
-        All data for this chart was provided by the administering agency and sourced from
-        <a href="https://sam.gov/" class="usa-link usa-link--external" target="_blank"
-          rel="noopener noreferrer">SAM.gov</a> and
-        <a href="https://home.treasury.gov/policy-issues/tax-policy/tax-expenditures"
-          class="usa-link usa-link--external" target="_blank" rel="noopener noreferrer">Treasury.gov</a>.
+    <!-- Category Title -->
+    <div class="margin-bottom-4">
+      <h2 class="font-heading-xl text-primary margin-0 line-height-heading-2">
+        {{ page.title }}
+      </h2>
+      <p class="text-base font-sans-md margin-top-2 margin-bottom-0 line-height-sans-4 maxw-tablet">
+        Programs and related information use data from SAM.gov, USASpending.gov, and Treasury.gov.
+        Select from the dropdowns below to view categories and sub-categories.
       </p>
-      <div class="display-flex margin-bottom-2">
-        <div class="padding-right-5 display-flex flex-column">
-          <div class="text-primary font-sans-3xl text-bold">
-            {{ page.total_num_programs }}
+    </div>
+
+    <!-- Category Selectors -->
+    <div class="display-flex flex-wrap flex-align-end margin-bottom-5">
+      <div class="margin-right-3 margin-bottom-2">
+        <label class="usa-label font-sans-2xs text-bold text-base-dark text-uppercase text-ls-1 margin-bottom-1" for="category">
+          Select Category
+          <span class="text-error">*</span>
+        </label>
+        <select class="usa-select width-mobile radius-md" name="category" id="category">
+          <option value>All categories</option>
+        </select>
+      </div>
+      <div class="margin-right-3 margin-bottom-2">
+        <label class="usa-label font-sans-2xs text-bold text-base-dark text-uppercase text-ls-1 margin-bottom-1" for="subcategory">
+          Select Sub-category
+        </label>
+        <select class="usa-select width-mobile radius-md" name="subcategory" id="subcategory">
+          <option value>-Select-</option>
+        </select>
+      </div>
+      <button id="category-button" class="usa-button bg-primary hover:bg-primary-dark margin-bottom-2 padding-x-4 radius-md">
+        Update Category
+      </button>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="card padding-4 margin-bottom-5">
+      <!-- Stats Header -->
+      <div class="margin-bottom-5">
+        <h3 class="font-heading-lg text-primary margin-0 margin-bottom-3">
+          {{ page.title }} Expenditures
+        </h3>
+
+        <p class="text-base font-sans-sm line-height-sans-4 margin-0 margin-bottom-4">
+          All data was provided by the administering agency and sourced from
+          <a href="https://sam.gov/" class="usa-link usa-link--external" target="_blank" rel="noopener noreferrer">SAM.gov</a> and
+          <a href="https://home.treasury.gov/policy-issues/tax-policy/tax-expenditures" class="usa-link usa-link--external" target="_blank" rel="noopener noreferrer">Treasury.gov</a>.
+        </p>
+
+        <!-- Stats Cards Row -->
+        <div class="grid-row grid-gap-3">
+          <div class="grid-col-12 tablet:grid-col-4">
+            <div class="stat-card">
+              <div class="stat-card__value">{{ page.total_num_programs }}</div>
+              <div class="stat-card__label">programs</div>
+            </div>
           </div>
-          <div class="font-heading-lg line-height-heading-5">programs</div>
-        </div>
-        <div class="padding-right-5 display-flex flex-column">
-          <div id="obligations-total" class="text-primary font-sans-3xl text-bold">
+          <div class="grid-col-12 tablet:grid-col-4 margin-top-2 tablet:margin-top-0">
+            <div class="stat-card stat-card--accent">
+              <div class="stat-card__value" id="obligations-total"></div>
+              <div class="stat-card__label">in FY {{ page.fiscal_year }} expenditures</div>
+            </div>
           </div>
-          <div class="font-heading-lg line-height-heading-5">
-            in FY {{ page.fiscal_year }} expenditures
-          </div>
-        </div>
-        <div class="display-flex flex-column">
-          <div class="text-primary font-sans-3xl text-bold">
-            {{ page.total_num_sub_cats }}
-          </div>
-          <div class="font-heading-lg line-height-heading-5">
-            sub-categories
+          <div class="grid-col-12 tablet:grid-col-4 margin-top-2 tablet:margin-top-0">
+            <div class="stat-card stat-card--warm">
+              <div class="stat-card__value">{{ page.total_num_sub_cats }}</div>
+              <div class="stat-card__label">sub-categories</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div
-        class="border-bottom-1px border-black width-full margin-bottom-3"
-      ></div>
+      <!-- Divider -->
+      <div class="border-bottom border-base-lighter margin-bottom-4"></div>
 
-      <div
-        class="display-flex flex-justify-start flex-align-center grid-row grid-gap-3"
-      >
-        <div class="font-heading-lg line-height-heading-2">
+      <!-- View Options -->
+      <div class="display-flex flex-column tablet:flex-row flex-align-start tablet:flex-align-center margin-bottom-4">
+        <span class="font-sans-md text-base-dark margin-right-4 margin-bottom-2 tablet:margin-bottom-0">
           View top FY {{ page.fiscal_year }} for:
-        </div>
+        </span>
 
-        <div class="usa-radio display-flex flex-align-center">
-          <input
-            class="usa-radio__input"
-            id="subCategory"
-            type="radio"
-            name="view-options"
-            checked
-          />
-          <label
-            class="usa-radio__label font-sans-sm line-height-body-3 margin-top-0"
-            for="subCategory"
-            >Sub-category</label
-          >
-        </div>
+        <div class="display-flex flex-wrap flex-align-center">
+          <div class="usa-radio display-flex flex-align-center margin-right-3 margin-bottom-1 tablet:margin-bottom-0">
+            <input class="usa-radio__input" id="subCategory" type="radio" name="view-options" checked />
+            <label class="usa-radio__label font-sans-xs margin-top-0 padding-left-4" for="subCategory">Sub-category</label>
+          </div>
 
-        <div class="usa-radio display-flex flex-align-center">
-          <input
-            class="usa-radio__input"
-            id="agency"
-            type="radio"
-            name="view-options"
-          />
-          <label
-            class="usa-radio__label font-sans-sm line-height-body-3 margin-top-0"
-            for="agency"
-            >Agency</label
-          >
+          <div class="usa-radio display-flex flex-align-center margin-right-3 margin-bottom-1 tablet:margin-bottom-0">
+            <input class="usa-radio__input" id="agency" type="radio" name="view-options" />
+            <label class="usa-radio__label font-sans-xs margin-top-0 padding-left-4" for="agency">Agency</label>
+          </div>
+
+          {% if page.total_num_applicant_types > 0 %}
+          <div class="usa-radio display-flex flex-align-center margin-bottom-1 tablet:margin-bottom-0">
+            <input class="usa-radio__input" id="eligible-applicant" type="radio" name="view-options" />
+            <label class="usa-radio__label font-sans-xs margin-top-0 padding-left-4" for="eligible-applicant">Eligible applicant type</label>
+          </div>
+          {% endif %}
         </div>
-        {% if page.total_num_applicant_types > 0 %}
-        <div class="usa-radio display-flex flex-align-center">
-          <input
-            class="usa-radio__input"
-            id="eligible-applicant"
-            type="radio"
-            name="view-options"
-          />
-          <label
-            class="usa-radio__label font-sans-sm line-height-body-3 margin-top-0"
-            for="eligible-applicant"
-            >Eligible applicant type</label
-          >
-        </div>
-        {% endif %}
       </div>
 
-      <svg id="myChart" class="width-full" height="500" aria-label="Chart displaying data based on selection" role="img"></svg>
+      <!-- Chart -->
+      <div class="margin-bottom-4">
+        <svg id="myChart" class="width-full" height="400" aria-label="Chart displaying category data" role="img"></svg>
+      </div>
 
-      <!-- Three tables, hidden/shown dynamically -->
+      <!-- Data Tables -->
       <div id="table-container">
-        <div id="table-title" class="text-bold font-sans-lg text-primary">
-          <!-- The title will be dynamically updated here -->
+        <div id="table-title" class="font-heading-md text-primary text-bold margin-bottom-3"></div>
+
+        <!-- Sub-categories Table -->
+        <div class="overflow-x-auto">
+          <table class="usa-table width-full margin-bottom-0" id="sub-categories-table">
+            <thead>
+              <tr>
+                <th data-sortable data-column="title" scope="col" class="width-mobile-lg font-sans-xs">
+                  <span class="header-text">Sub-category</span>
+                </th>
+                <th data-sortable data-column="total_num_programs" scope="col" class="width-mobile font-sans-xs">
+                  <span class="header-text">Number of Programs</span>
+                </th>
+                <th data-sortable data-column="total_obs" scope="col" class="font-sans-xs">
+                  <span class="header-text">Expenditures (FY {{ page.fiscal_year }})</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
         </div>
-        <table class="usa-table width-full margin-bottom-0" id="sub-categories-table">
-          <thead>
-            <tr>
-              <th
-                data-sortable
-                data-column="title"
-                scope="col"
-                class="width-mobile-lg"
-              >
-                <span class="header-text">Sub-category</span>
-              </th>
-              <th
-                data-sortable
-                data-column="total_num_programs"
-                scope="col"
-                class="width-mobile"
-              >
-                <span class="header-text">Number of Programs</span>
-              </th>
-              <th data-sortable data-column="total_obs" scope="col">
-                <span class="header-text"
-                  >Expenditures (FY {{ page.fiscal_year }})</span
-                >
-              </th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <div
-          class="usa-sr-only"
-          aria-live="polite"
-          id="sub-categories-table-status"
-        ></div>
+        <div class="usa-sr-only" aria-live="polite" id="sub-categories-table-status"></div>
 
-        <table
-          class="usa-table width-full margin-bottom-0"
-          id="agencies-table"
-          style="display: none"
-        >
-          <thead>
-            <tr>
-              <th
-                data-sortable
-                data-column="title"
-                scope="col"
-                class="width-mobile-lg"
-              >
-                <span class="header-text">Agency</span>
-              </th>
-              <th
-                data-sortable
-                data-column="total_num_programs"
-                scope="col"
-                class="width-mobile"
-              >
-                <span class="header-text">Number of Programs</span>
-              </th>
-              <th data-sortable data-column="total_obs" scope="col">
-                <span class="header-text"
-                  >Expenditures (FY {{ page.fiscal_year }})</span
-                >
-              </th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <div
-          class="usa-sr-only"
-          aria-live="polite"
-          id="agencies-table-status"
-        ></div>
+        <!-- Agencies Table -->
+        <div class="overflow-x-auto">
+          <table class="usa-table width-full margin-bottom-0" id="agencies-table" style="display: none">
+            <thead>
+              <tr>
+                <th data-sortable data-column="title" scope="col" class="width-mobile-lg font-sans-xs">
+                  <span class="header-text">Agency</span>
+                </th>
+                <th data-sortable data-column="total_num_programs" scope="col" class="width-mobile font-sans-xs">
+                  <span class="header-text">Number of Programs</span>
+                </th>
+                <th data-sortable data-column="total_obs" scope="col" class="font-sans-xs">
+                  <span class="header-text">Expenditures (FY {{ page.fiscal_year }})</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="usa-sr-only" aria-live="polite" id="agencies-table-status"></div>
 
-        <table
-          class="usa-table width-full margin-bottom-0"
-          id="applicant-types-table"
-          style="display: none"
-        >
-          <thead>
-            <tr>
-              <th
-                data-sortable
-                data-column="title"
-                scope="col"
-                class="width-mobile-lg"
-              >
-                <span class="header-text">Applicant Type</span>
-              </th>
-              <th
-                data-sortable
-                data-column="total_num_programs"
-                scope="col"
-                class="width-mobile"
-              >
-                <span class="header-text">Number of Programs</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <div
-          class="usa-sr-only"
-          aria-live="polite"
-          id="applicant-types-table-status"
-        ></div>
+        <!-- Applicant Types Table -->
+        <div class="overflow-x-auto">
+          <table class="usa-table width-full margin-bottom-0" id="applicant-types-table" style="display: none">
+            <thead>
+              <tr>
+                <th data-sortable data-column="title" scope="col" class="width-mobile-lg font-sans-xs">
+                  <span class="header-text">Applicant Type</span>
+                </th>
+                <th data-sortable data-column="total_num_programs" scope="col" class="width-mobile font-sans-xs">
+                  <span class="header-text">Number of Programs</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="usa-sr-only" aria-live="polite" id="applicant-types-table-status"></div>
       </div>
 
       <!-- Pagination and Download -->
-      <div>
-        <div class="grid-row grid-gap flex-align-center">
-          <div class="grid-col-fill">
-            <span class="font-sans-sm" id="pagination-info">
-              Showing <span class="text-bold" id="results-start">1</span> to
-              <span class="text-bold" id="results-end">10</span> of
-              <span class="text-bold" id="results-total">0</span> results
+      <div class="margin-top-4 padding-top-3 border-top border-base-lighter">
+        <div class="display-flex flex-column tablet:flex-row flex-align-start tablet:flex-align-center flex-justify">
+          <div class="margin-bottom-2 tablet:margin-bottom-0">
+            <span class="font-sans-xs text-base" id="pagination-info">
+              Showing <span class="text-bold text-base-dark" id="results-start">1</span> to
+              <span class="text-bold text-base-dark" id="results-end">10</span> of
+              <span class="text-bold text-base-dark" id="results-total">0</span> results
             </span>
           </div>
-          <div class="grid-col-auto">
-            <nav aria-label="Pagination" class="usa-pagination">
-              <ul class="usa-pagination__list">
-                <li class="usa-pagination__item usa-pagination__arrow">
-                  <a
-                    href="javascript:void(0);"
-                    class="usa-pagination__link usa-pagination__previous-page"
-                    aria-label="Previous page"
-                    id="prev-page-button"
-                  >
-                    <svg class="usa-icon" aria-hidden="true" role="img">
-                      <use
-                        xlink:href="/assets/img/sprite.svg#navigate_before"
-                      ></use>
-                    </svg>
-                    <span class="usa-pagination__link-text">Previous</span>
-                  </a>
-                </li>
-                <li class="usa-pagination__item usa-pagination__arrow">
-                  <a
-                    href="javascript:void(0);"
-                    class="usa-pagination__link usa-pagination__next-page"
-                    aria-label="Next page"
-                    id="next-page-button"
-                  >
-                    <span class="usa-pagination__link-text">Next </span>
-                    <svg class="usa-icon" aria-hidden="true" role="img">
-                      <use
-                        xlink:href="/assets/img/sprite.svg#navigate_next"
-                      ></use>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+
+          <nav aria-label="Pagination" class="usa-pagination">
+            <ul class="usa-pagination__list display-flex flex-align-center margin-0 padding-0">
+              <li class="usa-pagination__item usa-pagination__arrow">
+                <a href="javascript:void(0);" class="usa-pagination__link usa-pagination__previous-page display-flex flex-align-center text-primary hover:text-primary-dark font-sans-xs text-no-underline"
+                  aria-label="Previous page" id="prev-page-button">
+                  <svg class="usa-icon" aria-hidden="true" role="img">
+                    <use xlink:href="/assets/img/sprite.svg#navigate_before"></use>
+                  </svg>
+                  <span class="usa-pagination__link-text">Previous</span>
+                </a>
+              </li>
+              <li class="usa-pagination__item usa-pagination__arrow">
+                <a href="javascript:void(0);" class="usa-pagination__link usa-pagination__next-page display-flex flex-align-center text-primary hover:text-primary-dark font-sans-xs text-no-underline"
+                  aria-label="Next page" id="next-page-button">
+                  <span class="usa-pagination__link-text">Next</span>
+                  <svg class="usa-icon" aria-hidden="true" role="img">
+                    <use xlink:href="/assets/img/sprite.svg#navigate_next"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
 
-        <div class="grid-row">
-          <div class="grid-col-auto">
-            <button class="usa-button usa-button--outline border-2px hover:border-2px">
-              <span>Download .csv file</span>
-              <svg
-                class="usa-icon margin-left-1"
-                aria-hidden="true"
-                focusable="false"
-                role="img"
-              >
-                <use xlink:href="/assets/img/sprite.svg#file_download"></use>
-              </svg>
-            </button>
-          </div>
+        <div class="margin-top-3">
+          <button class="usa-button usa-button--outline display-flex flex-align-center radius-md">
+            <svg class="usa-icon margin-right-1" aria-hidden="true" focusable="false" role="img">
+              <use xlink:href="/assets/img/sprite.svg#file_download"></use>
+            </svg>
+            Download .csv file
+          </button>
         </div>
       </div>
     </div>
   </div>
-</div>
+</main>
+
 {% include _about-the-data.html %}
